@@ -163,9 +163,24 @@ export function retrieveFromCV(rawQuery: string): string | null {
  */
 export function buildFallbackRAGResponse(rawQuery: string): string {
   const { personal, summary, coreSkills } = profileData;
-  const q = rawQuery.toLowerCase();
+  const q = rawQuery.toLowerCase().trim();
   const isIndonesian =
-    /\b(apa|siapa|bagaimana|ceritakan|tentang|pengalaman|proyek|kontak)\b/.test(q);
+    /\b(apa|siapa|bagaimana|ceritakan|tentang|pengalaman|proyek|kontak|resep|masak|cuaca|politik|lelucon|tolong)\b/.test(
+      q
+    );
+
+  // Check if query is explicitly off-topic
+  const isOffTopic =
+    /\b(resep|masak|makan|cuaca|presiden|politik|pemilu|jodoh|pacar|cinta|puisi|cerpen|cerita|lagu|film|zodiak|ramalan|lucu|lawak|joke|tebak|lelucon|game|gaming|recipe|cook|weather|president|politics|election|love|poem|song|movie|horoscope|joke)\b/.test(
+      q
+    );
+
+  if (isOffTopic) {
+    if (isIndonesian) {
+      return `Maaf, saya adalah asisten AI khusus portofolio profesional **${personal.name}** (**${personal.title}**).\n\nSaya dapat membantu Anda menjawab seputar:\n- **Arsitektur Frontend & Full-Stack** (React, Next.js, Vue, TypeScript, NestJS, Laravel)\n- **Proyek Enterprise:** BRI Enterprise Portal, AXA Mandiri, SMA PGRI Cibadak, PharmaStock\n- **12+ Tahun Riwayat Pengalaman Kerja**\n- **Ketersediaan & Kontak Ramdani**\n\nAda yang ingin Anda ketahui seputar topik di atas?`;
+    }
+    return `I am an AI assistant specifically dedicated to **${personal.name}'s** professional portfolio (**${personal.title}**).\n\nI can help answer questions regarding:\n- **Frontend & Full-Stack Architecture** (React, Next.js, Vue, TypeScript, NestJS, Laravel)\n- **Enterprise Projects:** BRI Enterprise Portal, AXA Mandiri, SMA PGRI Cibadak, PharmaStock\n- **12+ Years of Career Experience**\n- **Availability & Contact Info**\n\nHow can I assist you regarding his professional background?`;
+  }
 
   if (isIndonesian) {
     return `Berdasarkan profil **${personal.name}** (**${personal.title}**):\n\n${summary}\n\n- **Proyek Utama:** BRI Enterprise Portal (https://bri.co.id/web/guest), AXA Mandiri Enterprise Platform (https://www.axa-mandiri.co.id), SMA PGRI Cibadak School System (https://smapgricibadak.sch.id/), dan PharmaStock (https://pharmastock.muhramdani.com/)\n- **Tech Stack Utama:** ${coreSkills.frontend.slice(0, 8).join(", ")}, ${coreSkills.backend.slice(0, 5).join(", ")}\n- **Kontak:** ${personal.email} | ${personal.linkedin}\n\nSilakan tanyakan detail mengenai proyek **BRI**, **AXA Mandiri**, **SMA PGRI Cibadak**, **PharmaStock**, atau **riwayat kerja**!`;
