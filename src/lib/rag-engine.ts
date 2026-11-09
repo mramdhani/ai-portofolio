@@ -8,7 +8,7 @@ import profileData from "@/data/profile-data.json";
 export function retrieveFromCV(rawQuery: string): string | null {
   const q = rawQuery.toLowerCase().trim();
   const isIndonesian =
-    /\b(apa|siapa|dimana|kapan|kenapa|mengapa|bagaimana|ceritakan|tentang|pengalaman|kerja|proyek|kontak|kuliah|pendidikan|bisa|kelebihan|tahun|tolong|jelaskan)\b/.test(
+    /\b(apa|siapa|dimana|kapan|kenapa|mengapa|bagaimana|ceritakan|tentang|pengalaman|kerja|proyek|kontak|kuliah|pendidikan|bisa|kelebihan|tahun|tolong|jelaskan|umur|usia|lahir|kamu|anda|berapa|ada|nggak|gak|apakah|resep|masak|halo|hai)\b/.test(
       q
     );
 
@@ -154,6 +154,18 @@ export function retrieveFromCV(rawQuery: string): string | null {
     return `**Why work with Muhamad Ramdani?**\n\n- **12+ Years of Proven Experience:** From Full Stack Engineer to **Lead Front End Programmer** leading enterprise teams.\n- **Enterprise-Grade Architecture:** Core Frontend Developer behind **BRI Enterprise Portal** (https://bri.co.id/web/guest), **AXA Mandiri Enterprise Platform** (https://www.axa-mandiri.co.id), and **EMC Singapore (SEW+)**.\n- **End-to-End Full-Stack Delivery:** Lead Full-Stack Developer for **SMA PGRI Cibadak School Management System** (Nuxt.js, Laravel, face detection attendance, CBT, LMS on Linux VPS) and **PharmaStock** (Next.js, NestJS, PostgreSQL, Docker).\n- **Code Quality & Leadership:** Experienced in team code reviews, reusable component systems, Liferay CMS themes, and Linux VPS deployment.`;
   }
 
+  // 13. Age / Birthday / Tanggal Lahir / Usia
+  if (
+    /\b(umur|usia|lahir|tanggal lahir|kapan lahir|tahun berapa lahir|birth|birthday|age|how old)\b/.test(
+      q
+    )
+  ) {
+    if (isIndonesian) {
+      return `Informasi tanggal lahir atau usia spesifik tidak dicantumkan secara publik di CV demi privasi data profesional.\n\nNamun sebagai gambaran jenjang karier:\n- **Latar Belakang:** Lulusan SMK Wikrama Bogor jurusan Rekayasa Perangkat Lunak (angkatan 2011).\n- **Pengalaman:** Telah berkarier secara profesional selama lebih dari **12 tahun** (sejak 2012 hingga sekarang).\n- **Senioritas:** Berpengalaman sebagai Senior Frontend Developer hingga **Lead Front End Programmer** & Full-Stack Engineer.`;
+    }
+    return `Specific birth date or age is withheld from the public CV for professional privacy reasons.\n\nFor context on his career seniority:\n- **Education:** Graduated in Software Engineering from SMK Wikrama Bogor (2008 – 2011).\n- **Professional Experience:** Over **12+ years** of software engineering experience (since 2012).\n- **Current Role:** Senior Frontend Developer & **Lead Front End Programmer**.`;
+  }
+
   return null;
 }
 
@@ -165,7 +177,7 @@ export function buildFallbackRAGResponse(rawQuery: string): string {
   const { personal, summary, coreSkills } = profileData;
   const q = rawQuery.toLowerCase().trim();
   const isIndonesian =
-    /\b(apa|siapa|bagaimana|ceritakan|tentang|pengalaman|proyek|kontak|resep|masak|cuaca|politik|lelucon|tolong)\b/.test(
+    /\b(apa|siapa|bagaimana|ceritakan|tentang|pengalaman|proyek|kontak|resep|masak|cuaca|politik|lelucon|tolong|kamu|anda|berapa|umur|usia|lahir|apakah|bisa|ada)\b/.test(
       q
     );
 
