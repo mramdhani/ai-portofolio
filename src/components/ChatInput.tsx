@@ -9,14 +9,18 @@ interface ChatInputProps {
 
 export function ChatInput({ onSend, isStreaming }: ChatInputProps) {
   const [input, setInput] = useState("");
+  const [isMultiline, setIsMultiline] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Auto-resize textarea
+  // Auto-resize textarea and detect multiline
   useEffect(() => {
     const textarea = textareaRef.current;
     if (textarea) {
       textarea.style.height = "auto";
-      textarea.style.height = Math.min(textarea.scrollHeight, 120) + "px";
+      const scrollH = textarea.scrollHeight;
+      const newHeight = Math.min(scrollH, 120);
+      textarea.style.height = `${newHeight}px`;
+      setIsMultiline(scrollH > 36);
     }
   }, [input]);
 
@@ -24,6 +28,7 @@ export function ChatInput({ onSend, isStreaming }: ChatInputProps) {
     if (input.trim() && !isStreaming) {
       onSend(input);
       setInput("");
+      setIsMultiline(false);
       if (textareaRef.current) {
         textareaRef.current.style.height = "auto";
       }
@@ -39,7 +44,9 @@ export function ChatInput({ onSend, isStreaming }: ChatInputProps) {
 
   return (
     <div
-      className="relative flex items-end gap-2 border rounded-xl px-4 py-3 transition-colors shadow-2xs"
+      className={`relative flex ${
+        isMultiline ? "items-end" : "items-center"
+      } gap-2.5 border rounded-2xl px-4 py-2 transition-all shadow-2xs`}
       style={{
         backgroundColor: "var(--bg-input)",
         borderColor: "var(--border-app)",
@@ -53,7 +60,7 @@ export function ChatInput({ onSend, isStreaming }: ChatInputProps) {
         placeholder="Ask about Ramdani's experience, skills, projects..."
         rows={1}
         disabled={isStreaming}
-        className="flex-1 bg-transparent text-sm resize-none outline-none disabled:opacity-50 leading-relaxed"
+        className="flex-1 bg-transparent text-sm resize-none outline-none disabled:opacity-50 py-1.5 leading-5 block"
         style={{
           color: "var(--text-primary)",
         }}
@@ -62,7 +69,7 @@ export function ChatInput({ onSend, isStreaming }: ChatInputProps) {
         type="button"
         onClick={handleSubmit}
         disabled={!input.trim() || isStreaming}
-        className="shrink-0 w-8 h-8 rounded-lg text-white flex items-center justify-center transition-opacity cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+        className="shrink-0 w-8 h-8 rounded-xl text-white flex items-center justify-center transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed mb-0.5"
         style={{
           backgroundColor: "var(--accent)",
         }}
