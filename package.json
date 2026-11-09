@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:static": "STATIC_EXPORT=true next build",
+    "build:static": "mv src/app/api /tmp/_myweb_api_bak && STATIC_EXPORT=true next build; mv /tmp/_myweb_api_bak src/app/api",
     "start": "next start",
     "lint": "eslint"
   },
