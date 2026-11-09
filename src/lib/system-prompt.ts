@@ -14,7 +14,8 @@ export function buildSystemPrompt(): string {
 ## PROFILE DATA
 Name: ${data.personal.name}
 Title: ${data.personal.title}
-Location: ${data.personal.location}
+Birthplace: ${data.personal.birthPlace || "Bogor, West Java, Indonesia"}
+Location / Current Residence: ${data.personal.location}
 Email: ${data.personal.email}
 LinkedIn: ${data.personal.linkedin}
 Portfolio: ${data.personal.portfolio}

@@ -156,7 +156,7 @@ export function retrieveFromCV(rawQuery: string): string | null {
 
   // 13. Age / Birthday / Tanggal Lahir / Usia
   if (
-    /\b(umur|usia|lahir|tanggal lahir|kapan lahir|tahun berapa lahir|birth|birthday|age|how old)\b/.test(
+    /\b(umur|usia|kapan lahir|tanggal lahir|tahun berapa lahir|birth|birthday|age|how old)\b/.test(
       q
     )
   ) {
@@ -164,6 +164,18 @@ export function retrieveFromCV(rawQuery: string): string | null {
       return `Informasi tanggal lahir atau usia spesifik tidak dicantumkan secara publik di CV demi privasi data profesional.\n\nNamun sebagai gambaran jenjang karier:\n- **Latar Belakang:** Lulusan SMK Wikrama Bogor jurusan Rekayasa Perangkat Lunak (angkatan 2011).\n- **Pengalaman:** Telah berkarier secara profesional selama lebih dari **12 tahun** (sejak 2012 hingga sekarang).\n- **Senioritas:** Berpengalaman sebagai Senior Frontend Developer hingga **Lead Front End Programmer** & Full-Stack Engineer.`;
     }
     return `Specific birth date or age is withheld from the public CV for professional privacy reasons.\n\nFor context on his career seniority:\n- **Education:** Graduated in Software Engineering from SMK Wikrama Bogor (2008 – 2011).\n- **Professional Experience:** Over **12+ years** of software engineering experience (since 2012).\n- **Current Role:** Senior Frontend Developer & **Lead Front End Programmer**.`;
+  }
+
+  // 14. Birth Place / Residence / Tempat Lahir / Tempat Tinggal / Asal
+  if (
+    /\b(lahir dimana|lahir di mana|dimana lahir|di mana lahir|tempat lahir|tinggal dimana|tinggal di mana|dimana tinggal|di mana tinggal|tempat tinggal|domisili|asal|asalnya|orang mana|dari mana|asal mana|berasal|where born|birthplace|born in|where do you live|where are you from)\b/.test(
+      q
+    )
+  ) {
+    if (isIndonesian) {
+      return `Muhamad Ramdani lahir dan bertempat tinggal di **Bogor, Jawa Barat, Indonesia**.\n\n- **Tempat Lahir:** Bogor, Jawa Barat, Indonesia\n- **Tempat Tinggal (Domisili):** Bogor, Jawa Barat, Indonesia\n- **Ketersediaan Kerja:** ${personal.availability} (Terbuka untuk kesempatan Remote, Hybrid, maupun Onsite di area Jabodetabek/Jakarta).`;
+    }
+    return `Muhamad Ramdani was born and currently resides in **Bogor, West Java, Indonesia**.\n\n- **Birthplace:** Bogor, West Java, Indonesia\n- **Current Residence / Location:** Bogor, West Java, Indonesia\n- **Work Availability:** ${personal.availability} (Open to Remote, Hybrid, or Onsite roles in Jakarta / Greater Jakarta area).`;
   }
 
   return null;
