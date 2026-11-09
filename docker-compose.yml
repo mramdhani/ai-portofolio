@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: muhramdani-portfolio
+    container_name: muhramdani-web
     restart: unless-stopped
     ports:
       - "3005:3000"
