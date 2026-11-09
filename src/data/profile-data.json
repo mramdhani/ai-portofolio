@@ -1,0 +1,284 @@
+{
+  "personal": {
+    "name": "Muhamad Ramdani",
+    "title": "Software Engineer | Frontend Development",
+    "location": "Bogor, West Java, Indonesia",
+    "email": "mr.ramdani@outlook.com",
+    "linkedin": "https://linkedin.com/in/mrramdani",
+    "portfolio": "https://muhramdani.com",
+    "availability": "Open to new opportunities"
+  },
+  "summary": "Software engineer specialising in enterprise frontend development with React, Vue.js and TypeScript. Contributed to client projects for BRI, AXA Mandiri, PLN and EMC Singapore through IT consulting teams, with responsibilities including API integration, team code reviews, testing and deployment. Recent projects include an inventory application using Next.js, NestJS and PostgreSQL, and a school management application using Nuxt.js, Laravel and MySQL.",
+  "coreSkills": {
+    "frontend": [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Vue.js",
+      "Nuxt.js",
+      "Angular",
+      "HTML5",
+      "CSS3/SCSS",
+      "Tailwind CSS",
+      "Bootstrap",
+      "jQuery"
+    ],
+    "backend": [
+      "PHP",
+      "Yii2",
+      "Laravel",
+      "Node.js",
+      "NestJS",
+      "MySQL",
+      "PostgreSQL",
+      "REST APIs"
+    ],
+    "delivery": [
+      "Git",
+      "Docker",
+      "Linux VPS",
+      "Swagger",
+      "Postman",
+      "Code Review",
+      "Manual UI Testing",
+      "Responsive UI",
+      "Figma Implementation",
+      "Liferay CMS",
+      "FreeMarker",
+      "Velocity"
+    ]
+  },
+  "experience": [
+    {
+      "company": "Cxrus Solutions",
+      "role": "Lead Front End Programmer",
+      "period": "Apr 2021 – Oct 2026",
+      "location": "Tangerang, Indonesia",
+      "highlights": [
+        "Led frontend development for enterprise applications and reviewed team members' code to maintain code quality and consistency.",
+        "Developed web interfaces and integrated REST APIs for projects serving financial services, insurance and energy clients.",
+        "Contributed to SEW+ for EMC Singapore, including frontend development, Git-based collaboration and application deployment through JBoss.",
+        "Other client projects included DPLK AXA Mandiri, AXA Mandiri Financial Services and Emma by AXA."
+      ],
+      "technologies": [
+        "React",
+        "Vue.js",
+        "Nuxt.js",
+        "Angular",
+        "JavaScript",
+        "TypeScript",
+        "Liferay CMS",
+        "REST APIs",
+        "Git"
+      ],
+      "links": {
+        "SEW+": "https://sewplus.emcsg.com/",
+        "AXA Mandiri": "https://www.axa-mandiri.co.id"
+      }
+    },
+    {
+      "company": "WEBARQ",
+      "role": "Front End Developer",
+      "period": "Jan 2018 – Mar 2021",
+      "location": "West Jakarta, Indonesia",
+      "highlights": [
+        "Developed enterprise websites and content-managed interfaces, including the BRI website, with responsive layouts and cross-browser compatibility.",
+        "Built Liferay themes, Application Display Templates and FreeMarker templates to support content management.",
+        "Implemented UI components and API integrations; worked on frontend performance, SEO and accessibility."
+      ],
+      "technologies": [
+        "Liferay CMS",
+        "React",
+        "Vue.js",
+        "Gatsby",
+        "JavaScript",
+        "HTML",
+        "CSS/SCSS",
+        "FreeMarker",
+        "REST APIs",
+        "Git"
+      ],
+      "links": {
+        "BRI": "https://bri.co.id/web/guest"
+      }
+    },
+    {
+      "company": "PT Asia e-Services",
+      "role": "Full Stack Engineer",
+      "period": "Nov 2014 – Dec 2017",
+      "location": "Bogor, Indonesia",
+      "highlights": [
+        "Developed custom web applications across frontend, PHP/Yii2 backend and MySQL database layers.",
+        "Handled database design, backend logic, UI implementation, testing and deployment.",
+        "Projects included SIMPEG for PDAM Ciamis and a custom ERP covering procurement, HR, finance, reporting and role-based access."
+      ],
+      "technologies": [
+        "PHP",
+        "Yii2",
+        "MySQL",
+        "JavaScript",
+        "jQuery",
+        "HTML",
+        "CSS",
+        "Bootstrap",
+        "REST APIs",
+        "Git"
+      ]
+    },
+    {
+      "company": "Pragma Informatika",
+      "role": "Full Stack Engineer",
+      "period": "May 2013 – Oct 2014",
+      "location": "Jakarta, Indonesia",
+      "highlights": [
+        "Developed custom web applications covering frontend, backend and database functionality; supported requirements analysis, user testing, deployment and client coordination.",
+        "Projects included Digital Flipbook for ICON+, APDB for PLN Makassar and AP2T enhancements for PLN Pontianak."
+      ],
+      "technologies": [
+        "PHP",
+        "MySQL",
+        "JavaScript",
+        "jQuery",
+        "HTML",
+        "CSS",
+        "Bootstrap"
+      ]
+    },
+    {
+      "company": "PT Perdana IMMG Indonesia",
+      "role": "Web Developer, Programmer",
+      "period": "Mar 2012 – Mar 2013",
+      "location": "South Jakarta, Indonesia",
+      "highlights": [
+        "Translated Photoshop UI designs into responsive HTML/CSS pages for Rakuten Cool Japan Indonesia.",
+        "Maintained web pages and interactive components, including debugging, testing and frontend integration."
+      ],
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "jQuery",
+        "PHP",
+        "MySQL"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "BRI Enterprise Portal",
+      "summary": "Building enterprise web portal for Indonesia's largest bank.",
+      "description": "Developed and optimized the frontend architecture for Bank Rakyat Indonesia's enterprise web portal. Focused on building reusable UI components, integrating complex APIs, and ensuring high performance, scalability, and responsiveness for millions of users.",
+      "contribution": "Served as the core Frontend Developer responsible for building the core foundation of the enterprise web portal. Developed custom themes, CMS integrations, template structures, and robust HTML/CSS architectures from scratch to ensure a scalable, high-performing UI.",
+      "keyResponsibilities": [
+        "Built custom Liferay CMS themes, template structures, and Application Display Templates from scratch.",
+        "Developed reusable UI components and robust HTML/CSS3 architectures.",
+        "Integrated complex REST APIs and ensured cross-browser responsiveness and high performance for millions of users."
+      ],
+      "techStack": [
+        "Liferay CMS",
+        "Bootstrap",
+        "REST APIs",
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "jQuery",
+        "FreeMarker",
+        "Velocity"
+      ],
+      "links": {
+        "live": "https://bri.co.id/web/guest"
+      }
+    },
+    {
+      "name": "AXA Mandiri Enterprise Platform",
+      "summary": "Building scalable insurance and financial web portals.",
+      "description": "Served as the core Frontend Developer responsible for building the foundational architecture of AXA Mandiri's enterprise platform. Engineered custom themes, CMS structures, and reusable template systems from scratch to ensure high performance, security, and responsiveness.",
+      "contribution": "Served as the core Frontend Developer responsible for building the core foundation of the enterprise web portal. Developed custom themes, CMS integrations, template structures, and robust HTML/CSS architectures from scratch to ensure a scalable, high-performing UI.",
+      "keyResponsibilities": [
+        "Architected core frontend templates and implemented custom Liferay CMS themes.",
+        "Configured CMS layouts and maintained clean, scalable HTML/CSS and component structures.",
+        "Delivered enterprise portals including DPLK AXA Mandiri, AXA Mandiri Financial Services, and Emma by AXA."
+      ],
+      "techStack": [
+        "Liferay CMS",
+        "HTML5",
+        "CSS3",
+        "Bootstrap",
+        "jQuery",
+        "JavaScript",
+        "Velocity",
+        "FreeMarker",
+        "REST APIs"
+      ],
+      "links": {
+        "live": "https://www.axa-mandiri.co.id"
+      }
+    },
+    {
+      "name": "SMA PGRI Cibadak School Management System",
+      "summary": "End-to-end school web portal and academic platform.",
+      "description": "Developed a comprehensive end-to-end web system for SMA PGRI Cibadak, designed to digitize school administration and academic activities. Built robust modules including online admissions, facial recognition attendance tracking, digital report cards, online examinations (CBT), and a Learning Management System (LMS) for students and teachers.",
+      "contribution": "Designed and developed the entire system architecture from scratch as the lead Full-Stack Developer. Handled both frontend and backend development, deployed and managed the Linux VPS hosting environment, and currently oversee the ongoing annual maintenance and platform reliability.",
+      "keyFeatures": [
+        "Face detection attendance system",
+        "Student & teacher portals",
+        "CBT online examinations",
+        "Digital report card management",
+        "Learning Management System (LMS) & online admissions"
+      ],
+      "keyResponsibilities": [
+        "Full-stack development using Nuxt.js (Frontend) and Laravel (Backend).",
+        "Linux VPS server setup, deployment, and database management (MySQL).",
+        "Ongoing annual platform maintenance and reliability management."
+      ],
+      "techStack": [
+        "Nuxt.js",
+        "Vue.js",
+        "Laravel",
+        "MySQL",
+        "Linux VPS",
+        "REST APIs"
+      ],
+      "links": {
+        "live": "https://smapgricibadak.sch.id/"
+      }
+    },
+    {
+      "name": "PharmaStock",
+      "summary": "Full-stack inventory management web application.",
+      "description": "Inventory web application built using Next.js, NestJS and PostgreSQL. Deployed with Docker on a Linux VPS, complete with interactive Swagger API documentation.",
+      "contribution": "Architected and developed the full-stack application end-to-end, covering the Next.js frontend, NestJS RESTful backend, PostgreSQL database schema, Swagger documentation, and Docker container deployment on a Linux VPS.",
+      "techStack": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "NestJS",
+        "PostgreSQL",
+        "Docker",
+        "Linux VPS",
+        "Swagger"
+      ],
+      "links": {
+        "live": "https://pharmastock.muhramdani.com/",
+        "apiDocs": "https://pharmastock.muhramdani.com/api/docs/"
+      }
+    }
+  ],
+  "education": [
+    {
+      "institution": "Universitas Terbuka",
+      "degree": "Bachelor's Degree in Management",
+      "period": "2017–2021"
+    },
+    {
+      "institution": "SMK Wikrama Bogor",
+      "degree": "Vocational High - Software Engineering",
+      "period": "2009–2012"
+    }
+  ],
+  "courses": [
+    "Mastering React",
+    "Liferay DXP 7.4 Front-End Developer"
+  ]
+}
