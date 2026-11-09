@@ -1,16 +1,66 @@
 @import "tailwindcss";
 
-:root {
-  --accent: #3b82f6;
-  --accent-hover: #60a5fa;
-  --surface: #0a0a0a;
-  --surface-elevated: #141414;
-  --surface-card: #1a1a1a;
-  --border: #262626;
-  --border-light: #333333;
-  --text-primary: #fafafa;
+:root,
+[data-theme="gemini"] {
+  --bg-app: #0a0a0a;
+  --bg-sidebar: #0f0f0f;
+  --bg-header: rgba(10, 10, 10, 0.85);
+  --bg-card: #141414;
+  --bg-card-hover: #1a1a1a;
+  --bg-card-subtle: rgba(26, 26, 26, 0.6);
+  --bg-input: #121212;
+  --bg-chip: #171717;
+  --bg-chip-hover: #222222;
+  --border-app: #262626;
+  --border-subtle: #1e1e1e;
+  --border-card: #262626;
+  --text-primary: #f5f5f5;
   --text-secondary: #a3a3a3;
   --text-muted: #737373;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-soft: rgba(59, 130, 246, 0.12);
+  --accent-border: rgba(59, 130, 246, 0.25);
+  --user-bubble-bg: #f5f5f5;
+  --user-bubble-text: #0a0a0a;
+  --ai-badge-bg: #141414;
+  --ai-badge-border: #262626;
+  --ai-badge-text: #60a5fa;
+  --code-bg: #1f1f1f;
+  --code-text: #93c5fd;
+  --theme-toggle-bg: #141414;
+  --theme-toggle-active: #262626;
+}
+
+[data-theme="claude"] {
+  --bg-app: #faf9f5;
+  --bg-sidebar: #f3f0e6;
+  --bg-header: rgba(250, 249, 245, 0.9);
+  --bg-card: #ffffff;
+  --bg-card-hover: #fcfbf8;
+  --bg-card-subtle: rgba(255, 255, 255, 0.8);
+  --bg-input: #ffffff;
+  --bg-chip: #eeebe2;
+  --bg-chip-hover: #e3ded3;
+  --border-app: #e2ded4;
+  --border-subtle: #ebe7dd;
+  --border-card: #e5e1d6;
+  --text-primary: #1f1e1d;
+  --text-secondary: #57554f;
+  --text-muted: #88847c;
+  --accent: #c15f3e;
+  --accent-hover: #d97757;
+  --accent-soft: rgba(193, 95, 62, 0.12);
+  --accent-border: rgba(193, 95, 62, 0.25);
+  --user-bubble-bg: #1f1e1d;
+  --user-bubble-text: #faf9f5;
+  --ai-badge-bg: #ffffff;
+  --ai-badge-border: #e2ded4;
+  --ai-badge-text: #c15f3e;
+  --code-bg: #efece3;
+  --code-text: #a84b2c;
+  --theme-toggle-bg: #ede9df;
+  --theme-toggle-active: #ffffff;
 }
 
 html {
@@ -25,7 +75,9 @@ body {
     "Segoe UI",
     Roboto,
     sans-serif;
-  background-color: var(--surface);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 /* Custom scrollbar */
@@ -36,11 +88,11 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: var(--border-app);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--border-light);
+  background: var(--border-card);
 }
 
 /* Chat streaming cursor */
@@ -52,19 +104,14 @@ body {
   content: "▋";
   animation: blink 1s step-end infinite;
   color: var(--accent);
-  margin-left: 1px;
+  margin-left: 2px;
 }
 
 /* Fade-in animation */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-in {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-/* Subtle glow */
-.glow-accent {
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.08);
+  animation: fadeIn 0.25s ease-out forwards;
 }

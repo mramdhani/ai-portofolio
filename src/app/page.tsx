@@ -7,70 +7,120 @@ import { ProfileSection } from "@/components/ProfileSection";
 
 export default function Home() {
   const { personal, summary } = profileData;
+  // Default to collapsed on both desktop and mobile!
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="h-dvh flex overflow-hidden bg-neutral-950">
+    <div
+      className="h-dvh flex overflow-hidden transition-colors"
+      style={{ backgroundColor: "var(--bg-app)" }}
+    >
       {/* Mobile Backdrop Overlay */}
       {sidebarOpen && (
         <div
           onClick={() => setSidebarOpen(false)}
-          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-xs lg:hidden transition-opacity"
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-xs lg:hidden transition-opacity"
           aria-hidden="true"
         />
       )}
 
-      {/* Left Sidebar — Slide-over drawer on mobile, static sidebar on desktop */}
+      {/* Profile & CV Sidebar
+          - On Desktop (lg): Smoothly transitions width from 0 (collapsed by default) to 380px/420px
+          - On Mobile: Slide-over drawer with translate-x
+      */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-[85vw] max-w-[380px] lg:static lg:w-[380px] xl:w-[420px] h-dvh bg-neutral-950 border-r border-neutral-800/60 overflow-y-auto transform transition-transform duration-300 ease-in-out ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        className={`fixed inset-y-0 left-0 z-50 h-dvh overflow-y-auto transition-all duration-300 ease-in-out lg:static lg:z-auto shrink-0 ${
+          sidebarOpen
+            ? "w-[85vw] max-w-[380px] translate-x-0 lg:w-[380px] xl:w-[420px] lg:opacity-100 border-r"
+            : "-translate-x-full w-[85vw] max-w-[380px] lg:translate-x-0 lg:w-0 lg:opacity-0 lg:overflow-hidden lg:border-r-0 pointer-events-none lg:pointer-events-none"
         }`}
+        style={{
+          backgroundColor: "var(--bg-sidebar)",
+          borderColor: "var(--border-app)",
+          pointerEvents: sidebarOpen ? "auto" : "none",
+        }}
+        aria-label="Profile and CV Sidebar"
       >
-        <div className="p-6 lg:p-8">
+        <div className="w-[85vw] max-w-[380px] lg:w-[380px] xl:w-[420px] p-6 lg:p-8">
           {/* Header */}
           <header className="mb-8">
             <div className="flex items-start justify-between mb-4">
               {/* Avatar / Initials */}
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center">
-                <span className="text-xl font-bold text-white">MR</span>
+              <div
+                className="w-13 h-13 rounded-2xl flex items-center justify-center shadow-sm"
+                style={{
+                  backgroundColor: "var(--accent)",
+                }}
+              >
+                <span className="text-lg font-bold text-white tracking-wider">
+                  MR
+                </span>
               </div>
 
-              {/* Close button on mobile */}
+              {/* Collapse button (works on both desktop and mobile) */}
               <button
+                type="button"
                 onClick={() => setSidebarOpen(false)}
-                className="lg:hidden p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-900 transition-colors cursor-pointer"
-                aria-label="Close sidebar"
+                className="p-1.5 rounded-lg border transition-all cursor-pointer hover:opacity-80"
+                style={{
+                  backgroundColor: "var(--bg-card)",
+                  borderColor: "var(--border-app)",
+                  color: "var(--text-secondary)",
+                }}
+                title="Collapse sidebar"
+                aria-label="Collapse sidebar"
               >
                 <svg
-                  className="w-5 h-5"
-                  fill="none"
+                  className="w-4 h-4"
                   viewBox="0 0 24 24"
+                  fill="none"
                   stroke="currentColor"
-                  strokeWidth={1.75}
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
+                  <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
               </button>
             </div>
 
-            <h1 className="text-xl font-semibold text-neutral-100 mb-1">
+            <h1
+              className="text-xl font-bold tracking-tight mb-1"
+              style={{ color: "var(--text-primary)" }}
+            >
               {personal.name}
             </h1>
-            <p className="text-sm text-neutral-400 mb-3">{personal.title}</p>
+            <p
+              className="text-xs sm:text-sm mb-3"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              {personal.title}
+            </p>
 
             {/* Availability badge */}
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[11px] text-emerald-400 font-medium">
+            <div
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border mb-4 shadow-2xs"
+              style={{
+                backgroundColor: "var(--accent-soft)",
+                borderColor: "var(--accent-border)",
+              }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full animate-pulse"
+                style={{ backgroundColor: "var(--accent)" }}
+              />
+              <span
+                className="text-[11px] font-medium"
+                style={{ color: "var(--accent)" }}
+              >
                 {personal.availability}
               </span>
             </div>
 
-            <p className="text-xs text-neutral-500 leading-relaxed">
+            <p
+              className="text-xs leading-relaxed"
+              style={{ color: "var(--text-secondary)" }}
+            >
               {summary}
             </p>
 
@@ -78,7 +128,8 @@ export default function Home() {
             <div className="flex items-center gap-3 mt-4">
               <a
                 href={`mailto:${personal.email}`}
-                className="text-xs text-neutral-400 hover:text-neutral-200 transition-colors flex items-center gap-1.5"
+                className="text-xs transition-colors flex items-center gap-1.5 hover:opacity-80 font-medium"
+                style={{ color: "var(--accent)" }}
                 aria-label="Email"
               >
                 <svg
@@ -86,7 +137,7 @@ export default function Home() {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={1.5}
+                  strokeWidth={1.75}
                 >
                   <path
                     strokeLinecap="round"
@@ -96,11 +147,13 @@ export default function Home() {
                 </svg>
                 Email
               </a>
+
               <a
                 href={personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-neutral-400 hover:text-neutral-200 transition-colors flex items-center gap-1.5"
+                className="text-xs transition-colors flex items-center gap-1.5 hover:opacity-80 font-medium"
+                style={{ color: "var(--accent)" }}
                 aria-label="LinkedIn"
               >
                 <svg
@@ -112,11 +165,13 @@ export default function Home() {
                 </svg>
                 LinkedIn
               </a>
+
               <a
                 href={personal.portfolio}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-neutral-400 hover:text-neutral-200 transition-colors flex items-center gap-1.5"
+                className="text-xs transition-colors flex items-center gap-1.5 hover:opacity-80 font-medium"
+                style={{ color: "var(--accent)" }}
                 aria-label="Portfolio"
               >
                 <svg
@@ -124,7 +179,7 @@ export default function Home() {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={1.5}
+                  strokeWidth={1.75}
                 >
                   <path
                     strokeLinecap="round"
@@ -138,24 +193,36 @@ export default function Home() {
           </header>
 
           {/* Divider */}
-          <div className="border-t border-neutral-800/50 my-6" />
+          <div
+            className="border-t my-6"
+            style={{ borderColor: "var(--border-subtle)" }}
+          />
 
           {/* CV sections */}
           <ProfileSection />
 
           {/* Footer */}
-          <footer className="mt-10 pt-6 border-t border-neutral-800/50">
-            <p className="text-[10px] text-neutral-700 text-center">
+          <footer
+            className="mt-10 pt-6 border-t"
+            style={{ borderColor: "var(--border-subtle)" }}
+          >
+            <p
+              className="text-[10px] text-center"
+              style={{ color: "var(--text-muted)" }}
+            >
               © 2026 {personal.name}. Built with Next.js + Gemini AI.
             </p>
           </footer>
         </div>
       </aside>
 
-      {/* Main Panel — Full-screen AI Chat Playground */}
+      {/* Main Panel — Full-width AI Chat Playground */}
       <main className="flex-1 flex flex-col h-dvh min-w-0">
         <div className="flex-1 min-h-0">
-          <ChatPlayground onOpenSidebar={() => setSidebarOpen(true)} />
+          <ChatPlayground
+            sidebarOpen={sidebarOpen}
+            onToggleSidebar={() => setSidebarOpen((prev) => !prev)}
+          />
         </div>
       </main>
     </div>

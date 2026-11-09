@@ -24,7 +24,6 @@ export function ChatInput({ onSend, isStreaming }: ChatInputProps) {
     if (input.trim() && !isStreaming) {
       onSend(input);
       setInput("");
-      // Reset textarea height
       if (textareaRef.current) {
         textareaRef.current.style.height = "auto";
       }
@@ -39,7 +38,13 @@ export function ChatInput({ onSend, isStreaming }: ChatInputProps) {
   };
 
   return (
-    <div className="relative flex items-end gap-2 bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-3 focus-within:border-neutral-700 transition-colors">
+    <div
+      className="relative flex items-end gap-2 border rounded-xl px-4 py-3 transition-colors shadow-2xs"
+      style={{
+        backgroundColor: "var(--bg-input)",
+        borderColor: "var(--border-app)",
+      }}
+    >
       <textarea
         ref={textareaRef}
         value={input}
@@ -48,12 +53,19 @@ export function ChatInput({ onSend, isStreaming }: ChatInputProps) {
         placeholder="Ask about Ramdani's experience, skills, projects..."
         rows={1}
         disabled={isStreaming}
-        className="flex-1 bg-transparent text-sm text-neutral-200 placeholder:text-neutral-600 resize-none outline-none disabled:opacity-50 leading-relaxed"
+        className="flex-1 bg-transparent text-sm resize-none outline-none disabled:opacity-50 leading-relaxed"
+        style={{
+          color: "var(--text-primary)",
+        }}
       />
       <button
+        type="button"
         onClick={handleSubmit}
         disabled={!input.trim() || isStreaming}
-        className="flex-shrink-0 w-8 h-8 rounded-lg bg-blue-600 hover:bg-blue-500 disabled:bg-neutral-800 disabled:text-neutral-600 text-white flex items-center justify-center transition-colors"
+        className="shrink-0 w-8 h-8 rounded-lg text-white flex items-center justify-center transition-opacity cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+        style={{
+          backgroundColor: "var(--accent)",
+        }}
         aria-label="Send message"
       >
         <svg
@@ -73,4 +85,3 @@ export function ChatInput({ onSend, isStreaming }: ChatInputProps) {
     </div>
   );
 }
-

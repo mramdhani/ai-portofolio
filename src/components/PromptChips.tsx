@@ -22,8 +22,22 @@ export function PromptChips({ onSelect, compact }: PromptChipsProps) {
       {chips.map((prompt) => (
         <button
           key={prompt}
+          type="button"
           onClick={() => onSelect(prompt)}
-          className="px-3.5 py-1.5 text-xs text-neutral-400 bg-neutral-900/80 border border-neutral-800 rounded-full hover:border-neutral-700 hover:bg-neutral-800/80 hover:text-neutral-200 transition-all duration-150 cursor-pointer"
+          className="px-3.5 py-1.5 text-xs rounded-full border transition-all duration-150 cursor-pointer hover:shadow-2xs"
+          style={{
+            backgroundColor: "var(--bg-chip)",
+            borderColor: "var(--border-app)",
+            color: "var(--text-secondary)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "var(--bg-chip-hover)";
+            e.currentTarget.style.color = "var(--text-primary)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "var(--bg-chip)";
+            e.currentTarget.style.color = "var(--text-secondary)";
+          }}
         >
           {prompt}
         </button>
