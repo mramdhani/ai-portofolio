@@ -11,7 +11,11 @@ export interface Message {
   content: string;
 }
 
-export function ChatPlayground() {
+interface ChatPlaygroundProps {
+  onOpenSidebar?: () => void;
+}
+
+export function ChatPlayground({ onOpenSidebar }: ChatPlaygroundProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -125,13 +129,40 @@ export function ChatPlayground() {
   return (
     <div className="flex flex-col h-full">
       {/* Header bar */}
-      <div className="border-b border-neutral-800/50 px-5 py-3.5 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-blue-500" />
-          <h2 className="text-sm font-medium text-neutral-200">
-            AI Assistant
-          </h2>
+      <div className="border-b border-neutral-800/50 px-4 lg:px-5 py-3 flex items-center justify-between bg-neutral-950/80 backdrop-blur-sm">
+        <div className="flex items-center gap-2.5">
+          {/* Mobile sidebar toggle button */}
+          {onOpenSidebar && (
+            <button
+              onClick={onOpenSidebar}
+              className="lg:hidden inline-flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white hover:border-neutral-700 transition-colors cursor-pointer"
+              aria-label="Open Profile & CV Sidebar"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={1.75}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
+                />
+              </svg>
+              <span className="text-xs font-medium">Profile & CV</span>
+            </button>
+          )}
+
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-blue-500" />
+            <h2 className="text-sm font-medium text-neutral-200">
+              AI Assistant
+            </h2>
+          </div>
         </div>
+
         {!showWelcome && (
           <button
             onClick={() => setMessages([])}
