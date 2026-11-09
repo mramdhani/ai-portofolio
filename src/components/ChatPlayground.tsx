@@ -306,18 +306,16 @@ export function ChatPlayground({
                 }
               />
             ))}
+
+            {/* Suggested follow-ups at the bottom of the conversation (scrolls naturally, doesn't block viewport) */}
+            {!isStreaming && (
+              <div className="pt-4 pb-2">
+                <PromptChips onSelect={sendMessage} compact />
+              </div>
+            )}
           </div>
         )}
       </div>
-
-      {/* Prompt chips when there are messages */}
-      {!showWelcome && !isStreaming && (
-        <div className="px-4 pb-2">
-          <div className="max-w-2xl mx-auto">
-            <PromptChips onSelect={sendMessage} compact />
-          </div>
-        </div>
-      )}
 
       {/* Input area */}
       <div

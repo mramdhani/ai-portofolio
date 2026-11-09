@@ -18,13 +18,23 @@ export function PromptChips({ onSelect, compact }: PromptChipsProps) {
   const chips = compact ? PROMPTS.slice(0, 3) : PROMPTS;
 
   return (
-    <div className="flex flex-wrap gap-2 justify-center">
+    <div
+      className={
+        compact
+          ? "flex flex-wrap gap-1.5 sm:gap-2 justify-start sm:justify-center"
+          : "flex flex-wrap gap-2 justify-center"
+      }
+    >
       {chips.map((prompt) => (
         <button
           key={prompt}
           type="button"
           onClick={() => onSelect(prompt)}
-          className="px-3.5 py-1.5 text-xs rounded-full border transition-all duration-150 cursor-pointer hover:shadow-2xs"
+          className={`rounded-full border transition-all duration-150 cursor-pointer hover:shadow-2xs ${
+            compact
+              ? "px-3 py-1 text-[11px] sm:text-xs"
+              : "px-3.5 py-1.5 text-xs"
+          }`}
           style={{
             backgroundColor: "var(--bg-chip)",
             borderColor: "var(--border-app)",
