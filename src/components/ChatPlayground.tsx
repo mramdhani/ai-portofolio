@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { ChatMessage } from "./ChatMessage";
 import { ChatInput } from "./ChatInput";
 import { PromptChips } from "./PromptChips";
+import { retrieveFromCV, buildFallbackRAGResponse } from "@/lib/rag-engine";
 
 export interface Message {
   id: string;
@@ -30,14 +31,35 @@ export function ChatPlayground({ onOpenSidebar }: ChatPlaygroundProps) {
     scrollToBottom();
   }, [messages, scrollToBottom]);
 
+  // Client-side streaming helper (allows the app to also work on pure static shared hosting!)
+  const streamLocalText = useCallback(
+    async (fullText: string, assistantId: string) => {
+      const words = fullText.split(/(?=[ \n])/);
+      let accumulated = "";
+      const chunkSize = 3;
+      for (let i = 0; i < words.length; i += chunkSize) {
+        accumulated += words.slice(i, i + chunkSize).join("");
+        const snapshot = accumulated;
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === assistantId ? { ...m, content: snapshot } : m
+          )
+        );
+        await new Promise((r) => setTimeout(r, 12));
+      }
+    },
+    []
+  );
+
   const sendMessage = useCallback(
     async (content: string) => {
       if (isStreaming || !content.trim()) return;
 
+      const trimmed = content.trim();
       const userMessage: Message = {
         id: Date.now().toString(),
         role: "user",
-        content: content.trim(),
+        content: trimmed,
       };
 
       const assistantMessage: Message = {
@@ -50,9 +72,17 @@ export function ChatPlayground({ onOpenSidebar }: ChatPlaygroundProps) {
       setIsStreaming(true);
 
       try {
+        // 1. Instant Local RAG Match (works with zero latency on both VPS & Static Hosting)
+        const directRag = retrieveFromCV(trimmed);
+        if (directRag) {
+          await streamLocalText(directRag, assistantMessage.id);
+          return;
+        }
+
+        // 2. Call Backend Gemini Streaming API (VPS / Vercel)
         const allMessages = [
           ...messages.map((m) => ({ role: m.role, content: m.content })),
-          { role: "user" as const, content: content.trim() },
+          { role: "user" as const, content: trimmed },
         ];
 
         const response = await fetch("/api/chat", {
@@ -62,14 +92,20 @@ export function ChatPlayground({ onOpenSidebar }: ChatPlaygroundProps) {
         });
 
         if (!response.ok) {
-          const errData = await response.json();
-          throw new Error(errData.error || "Failed to get response");
+          // If hosted on static shared hosting (404/405 on /api/chat) or server error, fallback to local RAG
+          const fallback = buildFallbackRAGResponse(trimmed);
+          await streamLocalText(fallback, assistantMessage.id);
+          return;
         }
 
         const reader = response.body?.getReader();
         const decoder = new TextDecoder();
 
-        if (!reader) throw new Error("No reader available");
+        if (!reader) {
+          const fallback = buildFallbackRAGResponse(trimmed);
+          await streamLocalText(fallback, assistantMessage.id);
+          return;
+        }
 
         let accumulated = "";
 
@@ -104,24 +140,15 @@ export function ChatPlayground({ onOpenSidebar }: ChatPlaygroundProps) {
             }
           }
         }
-      } catch (error: unknown) {
-        const errorMsg =
-          error instanceof Error ? error.message : "Something went wrong";
-        setMessages((prev) =>
-          prev.map((m) =>
-            m.id === assistantMessage.id
-              ? {
-                  ...m,
-                  content: `Sorry, something went wrong: ${errorMsg}. Please try again.`,
-                }
-              : m
-          )
-        );
+      } catch {
+        // Graceful fallback so static hosting or offline network still answers intelligently
+        const fallback = buildFallbackRAGResponse(trimmed);
+        await streamLocalText(fallback, assistantMessage.id);
       } finally {
         setIsStreaming(false);
       }
     },
-    [isStreaming, messages]
+    [isStreaming, messages, streamLocalText]
   );
 
   const showWelcome = messages.length === 0;

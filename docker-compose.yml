@@ -1,0 +1,14 @@
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: muhramdani-portfolio
+    restart: unless-stopped
+    ports:
+      - "3005:3000"
+    env_file:
+      - .env.local
+    environment:
+      - NODE_ENV=production
+

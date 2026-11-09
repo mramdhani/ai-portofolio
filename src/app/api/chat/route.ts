@@ -3,8 +3,6 @@ import { NextRequest } from "next/server";
 import { buildSystemPrompt } from "@/lib/system-prompt";
 import { retrieveFromCV, buildFallbackRAGResponse } from "@/lib/rag-engine";
 
-export const dynamic = "force-dynamic";
-
 function createSimulatedStream(textToStream: string): Response {
   const encoder = new TextEncoder();
   const words = textToStream.split(/(?=[ \n])/);
